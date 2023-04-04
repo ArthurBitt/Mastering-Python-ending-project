@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Admin</title>
 </head>
+
 <body>
     {% block content %}
     <h1>Bem-vindo, Admin!</h1>
@@ -20,31 +23,20 @@
             </tr>
         </thead>
         <tbody>
-            {% for bike in bikes %}
+            {% for bicicleta in bicicletas %}
             <tr>
-                <td>{{ bike[0] }}</td>
-                <td>{{ bike[1] }}</td>
-                <td>{{ bike[2] }}</td>
-                <td>{{ bike[3] }}</td>
-                <td>{{ bike[4] }}</td>
-                <td>{{ bike[5] }}</td>
-                <td>{{ bike[6] }}</td>
-                <td>
-                    <form method="post" action="{{ url_for('aumentar_estoque', bike_id=bike[0]) }}">
-                        <button type="submit">Aumentar estoque</button>
-                    </form>
-
-                    <form method="post" action="{{ url_for('diminuir_estoque', bike_id=bike[0]) }}">
-                        <button type="submit">Diminuir estoque</button>
-                    </form>
-                </td>
+                <td>{{ bicicleta[0] }}</td>
+                <td>{{ bicicleta[1] }}</td>
+                <td>{{ bicicleta[2] }}</td>
+                <td>{{ bicicleta[3] }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     {% endblock %}
-<a href="{{ url_for('edicao') }}" class="btn btn-primary">Editar</a>
-    
-</body>
-</html>
+    <div align="center"><a href="{{ url_for('edicao') }}">Editar</a>
+    <a href="{{ url_for('logout') }}">Logout</a></div>
 
+</body>
+
+</html>

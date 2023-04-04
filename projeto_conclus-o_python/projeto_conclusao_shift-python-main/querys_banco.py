@@ -15,6 +15,7 @@ def select_all(table_name):
     rows = c.fetchall()
 
     # Fecha a conexão
+    conn.commit()
     conn.close()
 
     # Retorna os valores da tabela
@@ -62,4 +63,19 @@ def delete_row(table_name, row_id):
     # Fecha a conexão
     conn.close()
 
+def select_row(id):
+    # Cria uma conexão com o banco de dados
+    conn = sqlite3.connect('Bikes.db')
+    c = conn.cursor()
 
+    # Executa o comando SQL para selecionar o valor com o ID fornecido
+    c.execute("SELECT * FROM bicicletas WHERE id = ?", (id,))
+
+    # Obtém o valor selecionado
+    valor = c.fetchone()
+
+    conn.commit()
+    # Fecha a conexão
+    conn.close()
+
+    return valor

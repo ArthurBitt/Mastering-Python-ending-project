@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Bikes for rent</title>
 </head>
 
 <body>
@@ -15,7 +16,7 @@
          <tr>
              <th>ID</th>
              <th>Tipo</th>
-             <th>Valor</th>
+             <th>Valor Aluguel</th>
              <th>Estoque</th>
              <th>Ações</th>
          </tr>
@@ -32,9 +33,11 @@
              </tr>
          {% endfor %}
      </table>
-     {{ get_flashed_messages() }}
+     <div align="center">{{ get_flashed_messages() }}
+        <buttom><a href="{{ url_for('index') }}">Logout</a></buttom>
+     </div>
  {% endblock %}
-<a href="{{ url_for('index') }}">Página inicial</a>
+
 </td>
 </body>
 

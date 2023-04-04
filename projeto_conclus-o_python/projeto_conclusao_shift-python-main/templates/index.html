@@ -1,32 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Minha aplicação Flask</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Login</title>
 </head>
-
 <body>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-
-    <h1>Página de Login</h1>
-    <form method="POST" action="{{ url_for('login') }}">
-        <label>Usuário:</label>
-        <input type="text" name="usuario"><br>
-        <label>Senha:</label>
-        <input type="password" name="senha"><br>
-        <input type="submit" value="Entrar">
-    </form>
-
-    <br>
-    <a href="{{ url_for('cadastro') }}">Cadastre-se</a>
+    <div align="center" class="login">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        <h1>Login</h1>
+        <form method="POST" action="{{ url_for('login') }}">
+            <label>Usuário:</label>
+            <input type="text" name="usuario"  autocomplete="off" placeholder="User"><br>
+            <label>Senha:</label>
+            <input type="password" name="senha"  autocomplete="off" placeholder="Password"><br>
+            <button>Entrar</button>
+        </form>
+        <br>
+        <a href="{{ url_for('cadastro') }}">Cadastre-se</a>
+    </div>
 </body>
 
 </html>

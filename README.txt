@@ -1,7 +1,10 @@
 README
 
+Esse é meu trabalho de conclusão do curso de 135h de Python.
 
-O sistema foi feito utilizando a linguagem Python em conjunto da ferramenta Flask. Foram utilizados ainda os recursos HTML e CSS para templates e static, afim de estrutrar e aplicar algum design nas páginas da aplicação. O banco de dados foi montado e editado com sqlite3.
+...
+
+Esse sistema foi feito utilizando a linguagem Python em conjunto da ferramenta Flask. Foram utilizados ainda os recursos HTML e CSS para templates e static, afim de estrutrar e aplicar algum design nas páginas da aplicação. O banco de dados foi montado e editado com sqlite3.
 
 
 obs. é necesário gerar as tabelas do arquivo banco.py e um novo usuário no cadastro sempre que a aplicação for aberta no VScode

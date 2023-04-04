@@ -1,0 +1,125 @@
+body {
+    background-color: #F62F63;
+    color:white;
+    font-family: Arial, sans-serif;
+}
+
+.login{
+    background-color: rgb(255,255,255,0.2);
+    margin: 15% 35% 15% 35%;
+    border-radius: 8px;
+    padding: 10px;
+    
+    
+}
+.login input{
+     background-color: transparent;
+     border:none;  
+     border-radius: 20px;  
+     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+     display: block;
+     height: 30px;
+     padding-left: 10px;
+     text-decoration: none;
+}
+     
+.content-edicao{
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 3% 35%;
+    padding: 15px;
+    
+}
+
+.content-edicao input{
+    margin: 8px;
+    border-radius: 12px;}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 ,
+p{
+    color:white;
+    font-weight: bold;
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+th,
+td {
+    border: 1px solid #D4D6D8;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #202A2F;
+    color: #D4D6D8;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #121F45;
+    color: #D4D6D8;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin-top: 20px;
+    
+}
+
+.btn {
+    
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+    margin-top: 10px;
+} 
+
+.btn-primary {
+    border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        background-color: transparent;
+        color: #fff;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+        cursor: pointer;
+        margin-top: 10px;
+}
+
+button {
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.form-control {
+    background-color:transparent;
+    color: #171717;
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    height: 30px;
+    line-height: 50%;
+    padding: 6px 12px;
+    width: 50%;
+    border-radius: 12px;
+}
