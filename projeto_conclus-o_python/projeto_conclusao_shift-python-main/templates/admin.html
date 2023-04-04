@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% block content %}
+    <h1>Bem-vindo, Admin!</h1>
+    <p>Lista de bicicletas:</p>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>Valor</th>
+                <th>Estoque</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bike in bikes %}
+            <tr>
+                <td>{{ bike[0] }}</td>
+                <td>{{ bike[1] }}</td>
+                <td>{{ bike[2] }}</td>
+                <td>{{ bike[3] }}</td>
+                <td>{{ bike[4] }}</td>
+                <td>{{ bike[5] }}</td>
+                <td>{{ bike[6] }}</td>
+                <td>
+                    <form method="post" action="{{ url_for('aumentar_estoque', bike_id=bike[0]) }}">
+                        <button type="submit">Aumentar estoque</button>
+                    </form>
+
+                    <form method="post" action="{{ url_for('diminuir_estoque', bike_id=bike[0]) }}">
+                        <button type="submit">Diminuir estoque</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}
+
+    
+</body>
+</html>
+
