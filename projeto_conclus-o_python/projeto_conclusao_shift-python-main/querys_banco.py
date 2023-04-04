@@ -3,15 +3,50 @@ import sqlite3
 conn = sqlite3.connect('Bikes.db')
 
 
-def drop_table(table_name):
+def select_all(table_name):
+    # Cria uma conexão com o banco de dados
     conn = sqlite3.connect('Bikes.db')
     c = conn.cursor()
 
-    c.execute(f"DROP TABLE IF EXISTS {table_name}")
+    # Executa o comando SQL para selecionar todos os valores da tabela
+    c.execute(f"SELECT * FROM {table_name}")
 
-    conn.commit()
+    # Obtém todos os valores da tabela
+    rows = c.fetchall()
+
+    # Fecha a conexão
     conn.close()
 
+    # Retorna os valores da tabela
+    return rows
+
+def insert_row(table_name, values):
+    # Cria uma conexão com o banco de dados
+    conn = sqlite3.connect('Bikes.db')
+    c = conn.cursor()
+
+    # Executa o comando SQL para inserir um novo valor na tabela
+    c.execute(f"INSERT INTO {table_name} VALUES (?, ?, ?, ?)", values)
+
+    # Salva as alterações no banco de dados
+    conn.commit()
+
+    # Fecha a conexão
+    conn.close()
+
+def update_row(table_name, values):
+    # Cria uma conexão com o banco de dados
+    conn = sqlite3.connect('Bikes.db')
+    c = conn.cursor()
+
+    # Executa o comando SQL para atualizar um valor na tabela
+    c.execute(f"UPDATE {table_name} SET tipo = ?, valor = ?, estoque = ? WHERE id = ?", values)
+
+    # Salva as alterações no banco de dados
+    conn.commit()
+
+    # Fecha a conexão
+    conn.close()
 
 def delete_row(table_name, row_id):
     # Cria uma conexão com o banco de dados
@@ -26,7 +61,5 @@ def delete_row(table_name, row_id):
 
     # Fecha a conexão
     conn.close()
-
-delete_row('usuarios',2)
 
 

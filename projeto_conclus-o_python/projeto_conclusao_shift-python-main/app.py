@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session,make_response
+from querys_banco import delete_row, select_all, insert_row, update_row
 import sqlite3
 import secrets
 import random
@@ -100,52 +101,6 @@ def aumentar_estoque(bike_id):
               (bike[3] + 1, bike_id))
     conn.commit()
     print('Estoque atualizado com sucesso!', 'success')
-
-    conn.close()
-    return redirect(url_for('admin'))
-
-# deletar e inserir bicicletas
-@app.route('/deletar_bike/<int:bike_id>')
-def deletar_bike(bike_id):
-    conn = sqlite3.connect('Bikes.db')
-    c = conn.cursor()
-
-    # Verifica se a bike existe no banco de dados
-    c.execute("SELECT * FROM bicicletas WHERE id = ?", (bike_id,))
-    bike = c.fetchone()
-    if bike is None:
-        flash('Bike não encontrada.', 'error')
-    else:
-        # Deleta a bike do banco de dados
-        c.execute("DELETE FROM bicicletas WHERE id = ?", (bike_id,))
-        conn.commit()
-        flash('Bike deletada com sucesso!', 'success')
-
-    conn.close()
-    return redirect(url_for('admin'))
-
-#
-@app.route('/inserir_bike', methods=['POST'])
-def inserir_bike():
-    id = request.form['id']
-    tipo = request.form['tipo']
-    valor = request.form['valor']
-    estoque = request.form['estoque']
-
-    conn = sqlite3.connect('Bikes.db')
-    c = conn.cursor()
-
-    # Verifica se o ID já existe no banco de dados
-    c.execute("SELECT * FROM bicicletas WHERE id = ?", (id,))
-    bike = c.fetchone()
-    if bike is not None:
-        flash('ID já cadastrado.', 'error')
-    else:
-        # Insere a nova bike no banco de dados
-        c.execute("INSERT INTO bicicletas VALUES (?, ?, ?, ?)",
-                  (id, tipo, valor, estoque))
-        conn.commit()
-        flash('Bike cadastrada com sucesso!', 'success')
 
     conn.close()
     return redirect(url_for('admin'))
@@ -267,5 +222,48 @@ def logout():
         session.pop('aluguel_feito', None)
     return redirect(url_for('index'))
 
+#
+@app.route('/edicao')
+def edicao():
+    return render_template('edicao.html')
+
+#
+@app.route('/excluir_valor', methods=['POST'])
+def excluir_valor():
+
+    # Obtém o ID do valor a ser excluído do formulário
+    id = request.form['id']
+
+    # Exclui o valor do banco de dados
+    delete_row('bicicletas', id)
+
+    # Redireciona de volta para a página de edição
+    return redirect(url_for('edicao'))
+#
+@app.route('/inserir_alterar_valor', methods=['POST'])
+def inserir_alterar_valor():
+
+    # Obtém os valores do formulário
+    id = request.form['id']
+    tipo = request.form['tipo']
+    valor = request.form['valor']
+    estoque = request.form['estoque']
+
+    # Verifica se o ID já existe no banco de dados
+    conn = sqlite3.connect('Bikes.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM bicicletas WHERE id = ?", (id,))
+    bike = c.fetchone()
+    conn.close()
+
+    if bike is None:
+        # Insere a nova bike no banco de dados
+        insert_row('bicicletas', (id, tipo, valor, estoque))
+    else:
+        # Atualiza a bike existente no banco de dados
+        update_row('bicicletas', (tipo, valor, estoque, id))
+
+    # Redireciona de volta para a página de edição
+    return redirect(url_for('edicao'))
 if __name__ == '__main__':
     app.run(debug=True)
