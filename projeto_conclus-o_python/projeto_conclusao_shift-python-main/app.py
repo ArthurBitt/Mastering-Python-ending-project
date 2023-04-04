@@ -1,8 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session,make_response
 from querys_banco import delete_row, select_all, insert_row, update_row
-import sqlite3
-import secrets
-import random
+import sqlite3,secrets,random,os
+
 
 app = Flask(__name__, static_url_path='/static')
 app.secret_key = 'sua_chave_secreta'
@@ -15,6 +14,7 @@ def index():
     response = make_response(render_template('index.html'))
     response.set_cookie('aluguel_feito', '', expires=0)
     return response
+
 
 # Rota admin
 @app.route('/admin', methods=["POST", "GET"])
@@ -36,8 +36,8 @@ def admin():
 # Rota para processar o formulário de login
 @app.route('/login', methods=['POST',])
 def login():
-    usuario = request.form['usuario'].lower()
-    senha = request.form['senha'].lower()
+    usuario = request.form['usuario']
+    senha = request.form['senha']
 
     if usuario == 'admin' and senha == 'admin123':
         print('Administrador logado com sucesso!')
@@ -53,15 +53,14 @@ def login():
     result = c.fetchone()
 
     if result is not None and result[1] == senha:
-        print('Login bem sucedido!')
+        flash('Login bem sucedido!')
         session['logged_in'] = True
         session['username'] = usuario
         return redirect(url_for('lista'))
+        
     else:
-        print('Usuário ou senha inválidos.')
         flash('Usuário ou senha inválidos.')
-        # Clear the input fields for username and password
-        return render_template('index.html', usuario='', senha='')
+        return render_template('index.html')
 
 # Rota para a página de cadastro de cliente
 @app.route('/cadastro')
@@ -148,6 +147,7 @@ def alugar(id):
     # Fecha a conexão com o banco de dados
     conn.close()
 
+#
 @app.route('/logout')
 def logout():
     if hasattr(request, 'context'):
