@@ -34,8 +34,6 @@ def admin():
     return render_template('admin.html', bicicletas=bicicletas)
 
 # Rota para processar o formulário de login
-
-
 @app.route('/login', methods=['POST',])
 def login():
     usuario = request.form['usuario'].lower()
@@ -43,6 +41,8 @@ def login():
 
     if usuario == 'admin' and senha == 'admin123':
         print('Administrador logado com sucesso!')
+        session['logged_in'] = True
+        session['username'] = 'admin'
         return redirect(url_for('admin'))
 
     conn = sqlite3.connect('Bikes.db')
@@ -54,13 +54,15 @@ def login():
 
     if result is not None and result[1] == senha:
         print('Login bem sucedido!')
+        session['logged_in'] = True
+        session['username'] = usuario
         return redirect(url_for('lista'))
     else:
         print('Usuário ou senha inválidos.')
         flash('Usuário ou senha inválidos.')
         # Clear the input fields for username and password
         return render_template('index.html', usuario='', senha='')
-    
+
 # Rota para a página de cadastro de cliente
 @app.route('/cadastro')
 def cadastro():
@@ -144,7 +146,6 @@ def alugar(id):
         return response
 
     # Fecha a conexão com o banco de dados
-    c.close()
     conn.close()
 
 @app.route('/logout')
