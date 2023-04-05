@@ -10,7 +10,29 @@
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <title>Login</title>
 </head>
+
 <body>
+    <!-- Login -->
+        
+        <div align='center'class='login'>
+            <h1>Login</h1>
+        <form  method="POST" action="{{ url_for('login') }}" autocomplete='off'>
+            <div class="mb-3">
+                <label class="form-label">User: </label>
+                <input type="text" name="usuario" autocomplete="off" placeholder="User"><br>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Senha:</label>
+                <input type="password" name="senha" autocomplete="off" placeholder="Password"><br>
+            </div>
+            <button class="btn btn-outline-success">Entrar</button>
+        </form>
+        <div class="link_under_button">
+            <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                href="{{ url_for('cadastro') }}">Cadastre-se</a>
+        </div>
+    </div>
+<!-- Flash message div -->
     <div align="center" class="login">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -21,28 +43,18 @@
         </ul>
         {% endif %}
         {% endwith %}
-        <h1>Login</h1>
-        <form method="POST" action="{{ url_for('login') }}">
-            <div class="mb-3">
-                <label class="form-label">User: </label>
-                <input  type="text" name="usuario"  autocomplete="off" placeholder="User"><br>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Senha:</label>
-                <input  type="password" name="senha"  autocomplete="off" placeholder="Password"><br>
-            </div>
-            <button class="btn btn-outline-success">Entrar</button>
-        </form>
-        <br>
-        <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ url_for('cadastro') }}">Cadastre-se</a>
-    </div>
+        </div>
 
+    <!-- autocomplete off com JS -->
+    <script>
+        $(document).ready(function () {
+            $('input').attr('autocomplete', 'off');
+        });
+    </script>
+    <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
-
-
-       
 </body>
 
 </html>

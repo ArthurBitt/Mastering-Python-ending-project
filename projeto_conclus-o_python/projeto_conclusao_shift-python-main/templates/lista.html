@@ -15,36 +15,62 @@
     {% block content %}
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="# ">Bike Rental</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                {% if session.logged_in %}
-                <li type = 'none' class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">{{ session.username }}
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
-                        <li><a class="dropdown-item" href=#>About   </a></li>
-                    </ul>
-                </li>
-                {% else %}
+    <div class="container-fluid ms-auto">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="# ">Bike Rental</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    {% if session.logged_in %}
+                    <li type='none' class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle link-success" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">{{ session.username }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('lista') }}">Lista</a></li>
+                            <li><a class="dropdown-item" href=#>About </a></li>
+                        </ul>
+                        
+                    </li>
+                    
+                    {% else %}
+                    {% endif %}
+                </ul>
+            </div>
 
-                {% endif %}
-            </ul>
-        </div>
-    </nav>
-
+            <div class="container-fluid ms-auto">
+               <form action="{{ url_for('buscar') }}" method="POST">
+                 <input type="text" name="termo_busca" placeholder="Busque uma bike">
+                 <button class="btn btn-outline-success" type="submit">Buscar</button>
+               </form>
+            </div>
+        </nav>
+        
+    </div>
 
     <!-- Lista -->
-    <h1>Nossas Bikes</h1>
-    <table class="table table-dark table-sm">
-        <tr>
+    <div>
+        <h1>Alugue sua Bike</h1>
+    </div>  
+<!-- Flash message div -->
+<div align="center" class="login">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li type="none" class="alert alert-success" role="alert">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+</div>
+
+    <table class=" table table-dark table-borderless">
+        <tr align="center" >
             <th scope="col">ID</th>
             <th scope="col">Tipo</th>
             <th scope="col">Valor Aluguel</th>
@@ -53,7 +79,7 @@
         </tr>
         {% for bike in bikes %}
         <tbody>
-            <tr>
+            <tr align="center">
                 <td>{{ bike[0] }}</td>
                 <td>{{ bike[1] }}</td>
                 <td>{{ bike[2] }}</td>
@@ -65,18 +91,17 @@
                     </form>
             </tr>
         </tbody>
+      
         {% endfor %}
     </table>
+
+   
     {% endblock %}
 
-    <div align="center" class="alert alert-success alert-flash" role="alert">{{ get_flashed_messages()}}
-    </div>
-
-    <div>
-        <!-- Bootstrp -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-            crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -198,5 +198,18 @@ def inserir_alterar_valor():
     # Redireciona de volta para a página de edição
     return redirect(url_for('admin'))
 
+
+@app.route('/buscar', methods=['POST'])
+def buscar():
+    if request.method == 'POST':
+        termo_busca = request.form['termo_busca']
+        conn = sqlite3.connect('Bikes.db')
+        c = conn.cursor()
+        c.execute("SELECT * FROM bicicletas WHERE tipo LIKE ?",
+                  ('%' + termo_busca + '%',))
+        bikes = c.fetchall()
+        conn.close()
+        return render_template('lista.html', bikes=bikes)
+    
 if __name__ == '__main__':
     app.run(debug=True)
