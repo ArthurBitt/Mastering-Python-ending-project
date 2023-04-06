@@ -29,4 +29,6 @@ Com o usuário e senha cadastrados no processo anterior, basta efetuar o login p
 já foi configurado um acesso separado para administrador, com user : admin e senha : admin: 123. Esse login da acesso ao conteudo do banco, onde é possível aumentar e diminuir o estoque, cadastrar e excluir bikes de acordo com o código id de cada uma.
 
 
-3 - 
+3 - Edição do banco de dados Bikes.db
+
+Essa rota foi configurada para editar os produtos que estão no banco, bem como para excluí - los de maneira externa. Com o acesso do admin, é possível realizar essas manutenções. 
