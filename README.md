@@ -6,7 +6,7 @@ README
 
 ```
 pip install Flask
-pip intall SQLite
+pip install SQLite
 ```
 
 Esse sistema foi feito utilizando a linguagem Python em conjunto da ferramenta Flask. Foram utilizados ainda os recursos HTML e CSS para templates e static, afim de estrutrar e aplicar algum design nas páginas da aplicação. O banco de dados foi montado e editado com sqlite3.
