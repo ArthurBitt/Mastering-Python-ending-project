@@ -1,4 +1,4 @@
 Flask
-SQlite
-SQLalchemy
+sqlite
+sqlalchemy
 gunicorn
