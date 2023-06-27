@@ -1,0 +1,4 @@
+Flask
+SQlite
+SQLalchemy
+gunicorn
